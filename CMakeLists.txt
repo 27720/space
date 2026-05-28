@@ -8,6 +8,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
+# Adding math.cpp when I implement it
 add_executable(main src/main.cpp)
 
 # Link libraries
