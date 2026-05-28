@@ -1,13 +1,3 @@
-// Experimental simulation of planetary motion about a star
-
-// Involves analysis of orbital error overtime when using different numerical integrators
-// including Euler and Runge-Kutta methods as well as extrapolation techniques like Bulirsch-Stoe 
-
-// Tracks orbital paths over elongated periods of time to highlight the changes that occur
-// as a result of slightly different initial conditions
-
-// currently in the learning stage of understanding how GL works
-
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -37,7 +27,7 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 }
 
 // Self-explanatory
-// Will eventually include movement keys and maybe a toggle for integration methods
+// Will eventually include movement keys
 void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
@@ -63,7 +53,6 @@ int main() {
 	// Initialise the GLAD loader by passing GLFW's function that knows how to fetch the addresses of OpenGL functions
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return -1;
 
-	// Not particularly necessary
 	glViewport(0, 0, 800, 600);
 
 	// Declare Vertex Shader to help GL determine vertex positions
@@ -109,52 +98,74 @@ int main() {
 	if (!success) {
     	glGetProgramInfoLog(shader, 512, NULL, errorLog);
 	}
-	
-	// Get rid of old shaders after linking (not needed anymore)
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragShader);
 	// --
 
+	// Get rid of old shaders after linking them (not needed anymore)
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragShader);
+
 	// Setup vertex data
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+	float triangle1[] = {
+		-0.875f, -0.5f, 0.0f,
+		-0.125f, -0.5f, 0.0f,
+		-0.5f, 0.5f, 0.0f
+	};
+
+	float triangle2[] = {
+		0.125f, -0.5f, 0.0f,
+		0.875f, -0.5f, 0.0f,
+		0.5f, 0.5f, 0.0f
 	};
 
 	// Declare a buffer object to store vertices in the GPU
 	// Declare an array object to store VBO configurations
-	unsigned int VBO, VAO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glBindVertexArray(VAO);
+	unsigned int VBO1, VBO2, VAO1, VAO2;
+	glGenVertexArrays(1, &VAO1);
+	glGenVertexArrays(1, &VAO2);
+	glGenBuffers(1, &VBO1);
+	glGenBuffers(1, &VBO2);
+	glBindVertexArray(VAO1);
 
-	// Select it, put shit into it, tell GL how to interpret it, enable it
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	// Select it, put shit into it, tell GL how to interpret it, and enable it
+	glBindBuffer(GL_ARRAY_BUFFER, VBO1);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle1), triangle1, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(VAO2);
+
+	// Select it, put shit into it, tell GL how to interpret it, and enable it 
+	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle2), triangle2, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	// Deselect everything
-	// not even necessary in the slighest btw (asides from maybe unbinding the vbo)
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	// Not necessary whatsoever asides from maybe deselecting the VBO since the VAO handles its selection in the render loop
+	// glBindBuffer(GL_ARRAY_BUFFER, 0);
+	// glBindVertexArray(0);
 
 	// Render loop
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
+		
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(shader);
-		glBindVertexArray(VAO);
+		glBindVertexArray(VAO1);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-
+		glBindVertexArray(VAO2);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	// get rid of all deez blokes
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+	// janitor (slow rn fixing later)
+    glDeleteVertexArrays(1, &VAO1);
+    glDeleteBuffers(1, &VBO1);
+	glDeleteVertexArrays(1, &VAO2);
+    glDeleteBuffers(1, &VBO2);
     glDeleteProgram(shader);
 
 	glfwTerminate();
