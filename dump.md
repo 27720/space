@@ -1,6 +1,6 @@
-- PLANNING ON FINISHING THIS BY 20/6
-	- wanna move onto other more ambitious projects that I've had to vault cause physics clears every alvl 
-	
+## PLANNING ON FINISHING THIS BY 20/6
+- wanna move onto other more ambitious projects that I've had to vault cause physics clears every alvl 
+
 ### NOTES
 
 - going for a dir struct where the math and GL stuff are separate, but i doubt ill give my shaders a home
@@ -28,8 +28,8 @@
 	
 ### ABOUT
 
-the projects initial spark came from an urge to stare at balls in 3d rather than 2d
-it then became about planets, leading me to numerical integrators and orbital mechanics which i had a lot of fun looking into
-eventually turned into an analytical simulation of n bodies orbiting about a star using different methods of integration
-to be specific, the 'star' is a body. it just represents a body that makes up a majority of the systems mass (something like our sun). this is cause an orbit is about the systems centre of mass (the 'barycentre'), so by having a relatively massive body in the centre, we restrict the barycentre to be somewhere within that region - point being that it looks nicer to me and the real goal of this project is making a visual lullaby for myself. note that the barycentre is still gonna shift due to newtons law of gravitation, a star acts to mitigate the visual effect of that
-simulation itself will be ran for a year (in game) for each integration method, with data logged to a csv thatll be externally plotted and analysed. said grafs will b posted somewhere on the repo
+- the projects initial spark came from an urge to stare at balls in 3d rather than 2d
+- it then became about planets, leading me to numerical integrators and orbital mechanics which i had a lot of fun looking into
+- eventually turned into an analytical simulation of n bodies orbiting about a star using different methods of integration
+- to be specific, the 'star' is a body. it just represents a body that makes up a majority of the systems mass (something like our sun). this is cause an orbit is about the systems centre of mass (the 'barycentre'), so by having a relatively massive body in the centre, we restrict the barycentre to be somewhere within that region - point being that it looks nicer to me and the real goal of this project is making a visual lullaby for myself. note that the barycentre is still gonna shift due to newtons law of gravitation, a star only acts to mitigate the visual effect of that
+- simulation itself will be ran for a year (in game) for each integration method, wit data logged to a csv thatll be externally plotted and analysed. said grafs will then b posted somewhere on the repo
