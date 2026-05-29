@@ -8,11 +8,13 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
-# Adding math.cpp when I implement it
-add_executable(main src/main.cpp)
+add_executable(main
+    src/main.cpp
+    src/math.cpp
+)
 
 # Link libraries
-# (open its respective .cmake file and search add_library to find the target name)
+# (note to self - open its respective .cmake file and search add_library to find the target name)
 target_link_libraries(main PRIVATE
     glfw
     glad::glad
