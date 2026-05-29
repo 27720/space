@@ -25,6 +25,7 @@ const char* fragShaderSrc = "#version 330 core\n"
 constexpr float UNIT_RATIO = 0.322f; // Ratio of screen units to AU, numerous trials suggested 0.322 is optimal  
 
 // Simulation parameters relative to the units defined in math.hpp
+// The periapsis (far right) corresponds to January, the top April, the apoapsis (far left) July, and the bottom October
 constexpr double STAR_MASS = 1.0;
 constexpr double A = 1.0; // Semi-major axis
 constexpr double E = 0.0167; // Eccentricity
