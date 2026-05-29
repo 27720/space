@@ -154,7 +154,7 @@ int main() {
 		inGameTime += dt * TIME_SCALE;
 		past = present; // w naming
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT); // Comment this out to see orbital path
 		
 		glUseProgram(shader);
 		glBindVertexArray(VAO);
