@@ -27,8 +27,8 @@ constexpr float UNIT_RATIO = 0.322f; // Ratio of screen units to AU, numerous tr
 // Simulation parameters relative to the units defined in math.hpp
 constexpr double STAR_MASS = 1.0;
 constexpr double A = 1.0; // Semi-major axis
-constexpr double E = 0.4; // Eccentricity
-constexpr double TIME_SCALE = 50.0; // i just messed w this until the earth stopped tping
+constexpr double E = 0.0167; // Eccentricity
+constexpr double TIME_SCALE = 3155760.0; // Adjusted so that 10 seconds = 1 year in game
 // --
 
 // Callbacks --

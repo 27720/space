@@ -10,10 +10,10 @@ I decided to not use SI units because it makes the numbers look cleaner (robbed 
     - Time will be measured in a sacred unit used by the Babylonians, seconds (s)
 
 Since we're not using standard units, we'll have to work out the value of gravitational constant relative to our units
-Gemini says G in these units is roughly 2.959 * 10-4 AU^3 M_s^-1 s^-2 
+Gemini says G in these units is roughly 3.964 * 10^-14 AU^3 M_s^-1 s^-2 
 */
 
-constexpr double G = 2.959e-4;
+constexpr double G = 3.964e-14;
 
 /*
 A Keplerian orbit refers to a mathematically ideal 2-body orbit
